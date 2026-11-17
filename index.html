@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#7057d9">
+  <title>Times Tables Adventure</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">✖</div>
+        <div><h1>Times Tables Adventure</h1><div class="tagline">Little steps. Big brain power!</div></div>
+      </div>
+      <div class="progress-pill" id="totalProgress">⭐ 0 stars</div>
+    </header>
+
+    <section id="home">
+      <div class="hero">
+        <h2>Ready to become a math star?</h2>
+        <p>Choose a times table, practice at your own pace, or take a mixed-up quiz. You've got this!</p>
+      </div>
+      <div class="section-head"><h3>Pick a times table</h3><span>0 × 0 through 12 × 12</span></div>
+      <div class="grid" id="tableGrid"></div>
+    </section>
+
+    <section id="setup" class="panel hidden">
+      <button class="back" id="backHome">← All tables</button>
+      <h2 id="setupTitle">The ×2 table</h2>
+      <p style="color:var(--muted);margin-top:-5px">How would you like to play?</p>
+      <div class="mode-row">
+        <button class="mode active" data-mode="practice"><strong>📚 Guided practice</strong><small>Go in order, from ×0 to ×12.</small></button>
+        <button class="mode" data-mode="quiz"><strong>🎲 Quiz time</strong><small>13 questions in a surprise order.</small></button>
+        <button class="mode" data-mode="focus"><strong>💡 Tricky Facts</strong><small>Start with facts that need more practice.</small></button>
+      </div>
+      <div id="bestScore" style="color:var(--muted);font-size:14px"></div>
+      <div id="factProgress" class="fact-progress"></div>
+      <div class="actions"><button class="primary" id="startGame">Let's go! 🚀</button></div>
+    </section>
+
+    <section id="game" class="panel hidden">
+      <div class="game-nav">
+        <button class="back" id="exitGame" type="button">← Back to tables</button>
+        <span class="exit-note">You can leave anytime 💜</span>
+      </div>
+      <div class="question-top"><span id="gameLabel">×2 · Practice</span><span id="questionCount">1 / 13</span></div>
+      <div class="track"><div id="bar" style="width:0%"></div></div>
+      <div class="question" id="question">2 × 0 = ?</div>
+      <form id="answerForm">
+        <div class="answer-row">
+          <input id="answer" type="number" inputmode="numeric" autocomplete="off" placeholder="Your answer" required>
+          <button class="primary" type="submit">Next</button>
+        </div>
+      </form>
+      <div class="hint">Take your time. Your results will appear at the end.</div>
+    </section>
+
+    <section id="results" class="panel hidden">
+      <div style="text-align:center;font-size:43px" id="resultEmoji">🎉</div>
+      <h2 style="text-align:center;margin:0">Adventure complete!</h2>
+      <div class="result-score" id="score">13 / 13</div>
+      <div class="result-caption" id="scoreCaption">Fantastic work!</div>
+      <div id="newStars" style="text-align:center;color:#d99a00;font-weight:900"></div>
+      <h3 style="margin:22px 0 8px">Answer review</h3>
+      <div class="review" id="reviewList"></div>
+      <div class="actions">
+        <button class="primary" id="retry">Play again</button>
+        <button class="secondary" id="toHome">Choose another table</button>
+      </div>
+    </section>
+    <div class="foot">Made for curious minds ✨ · Progress is saved on this device.</div>
+  </main>
+
+  <script src="script.js" defer></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(console.warn);
+      });
+    }
+  </script>
+</body>
+</html>
